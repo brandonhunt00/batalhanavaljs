@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batalha Naval</title>
+  <link rel="stylesheet" href="style-index.css" />
+</head>
+<body>
+
+  <div class="ocean-bg">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+
+  <main class="container">
+    <header class="hero">
+      <div class="ship-icon">⚓</div>
+      <h1 class="title">BATALHA<br><span>NAVAL</span></h1>
+      <p class="subtitle">Estratégia &amp; Destruição nos Mares</p>
+    </header>
+
+    <section class="setup-card">
+      <h2>Configurar Partida</h2>
+
+      <div class="players-row">
+        <div class="player-input-group" id="p1-group">
+          <label for="player1">Capitão 1</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🚢</span>
+            <input type="text" id="player1" placeholder="Nome do Jogador 1" maxlength="20" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <div class="player-input-group" id="p2-group">
+          <label for="player2">Capitão 2</label>
+          <div class="input-wrapper">
+            <span class="input-icon">⚓</span>
+            <input type="text" id="player2" placeholder="Nome do Jogador 2" maxlength="20" autocomplete="off" />
+          </div>
+        </div>
+      </div>
+
+      <div class="error-msg" id="error-msg"></div>
+
+      <button class="btn-start" id="btn-start">
+        <span class="btn-text">⚔️ ZARPAR PARA A BATALHA</span>
+        <span class="btn-ripple"></span>
+      </button>
+    </section>
+
+    <section class="rules-card">
+      <h3>📜 Regras Rápidas</h3>
+      <ul>
+        <li>Cada jogador posiciona <strong>5 navios</strong> secretamente</li>
+        <li>Navios: Porta-aviões(5), Encouraçado(4), Cruzador(3), Submarino(2), Destruidor(2)</li>
+        <li>Jogadores se alternam atirando nas coordenadas do oponente</li>
+        <li>Quem afundar todos os navios inimigos primeiro <strong>vence!</strong></li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="index.js"></script>
+</body>
+</html>

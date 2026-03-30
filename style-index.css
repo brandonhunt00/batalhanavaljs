@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Crimson+Pro:wght@400;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0a1628;
+  --deep:       #071020;
+  --ocean:      #0d2b55;
+  --water:      #1a4a7a;
+  --foam:       #4a9eca;
+  --gold:       #c9982a;
+  --gold-light: #f0c040;
+  --red:        #c0392b;
+  --red-light:  #e74c3c;
+  --white:      #f0e8d8;
+  --muted:      #8ab4d4;
+  --card-bg:    rgba(10, 30, 60, 0.88);
+  --radius:     12px;
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--deep);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── Ocean Background ── */
+.ocean-bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #040e1e 0%, #071833 40%, #0d2b55 100%);
+  z-index: 0;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.wave1 {
+  height: 200px;
+  background: radial-gradient(ellipse, #1a5fa8 0%, transparent 70%);
+  animation: waveMove 8s ease-in-out infinite;
+  bottom: -60px;
+}
+.wave2 {
+  height: 160px;
+  background: radial-gradient(ellipse, #0d3d6b 0%, transparent 70%);
+  animation: waveMove 12s ease-in-out infinite reverse;
+  bottom: -40px;
+}
+.wave3 {
+  height: 120px;
+  background: radial-gradient(ellipse, #4a9eca 0%, transparent 70%);
+  animation: waveMove 6s ease-in-out infinite;
+  bottom: -20px;
+  opacity: 0.08;
+}
+
+@keyframes waveMove {
+  0%, 100% { transform: translateX(-25%) scaleY(1); }
+  50%       { transform: translateX(0%)   scaleY(1.1); }
+}
+
+/* Stars */
+.ocean-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 8%,  rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 5%,  rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 18%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 35%, rgba(200,220,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80% 30%, rgba(200,220,255,0.4) 0%, transparent 100%);
+}
+
+/* ── Layout ── */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  animation: fadeDown 0.8s ease both;
+}
+
+.ship-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: bobFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 16px rgba(74,158,202,0.6));
+}
+
+@keyframes bobFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-10px) rotate(3deg); }
+}
+
+.title {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-shadow:
+    0 0 30px rgba(201,152,42,0.6),
+    0 2px 4px rgba(0,0,0,0.8);
+}
+
+.title span {
+  color: var(--gold);
+  text-shadow:
+    0 0 40px rgba(201,152,42,0.8),
+    0 2px 4px rgba(0,0,0,0.8);
+}
+
+.subtitle {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Cards ── */
+.setup-card, .rules-card {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid rgba(74,158,202,0.25);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.setup-card h2 {
+  font-family: 'Pirata One', cursive;
+  font-size: 1.8rem;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 2px;
+}
+
+/* ── Players Row ── */
+.players-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.player-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-input-group label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(74,158,202,0.3);
+  border-radius: 8px;
+  padding: 4px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--foam);
+  box-shadow: 0 0 0 3px rgba(74,158,202,0.15);
+}
+
+.input-icon { font-size: 1.2rem; }
+
+.input-wrapper input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.1rem;
+  padding: 10px 0;
+}
+
+.input-wrapper input::placeholder { color: rgba(138,180,212,0.4); }
+
+.vs-badge {
+  font-family: 'Pirata One', cursive;
+  font-size: 1.4rem;
+  color: var(--red-light);
+  padding-bottom: 14px;
+  text-shadow: 0 0 12px rgba(192,57,43,0.6);
+  flex-shrink: 0;
+}
+
+/* ── Error ── */
+.error-msg {
+  min-height: 24px;
+  text-align: center;
+  color: var(--red-light);
+  font-size: 0.95rem;
+  margin-top: 12px;
+  transition: opacity 0.3s;
+}
+
+/* ── Button ── */
+.btn-start {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--gold) 0%, #a07018 100%);
+  border: none;
+  border-radius: 8px;
+  color: var(--deep);
+  font-family: 'Pirata One', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 20px rgba(201,152,42,0.35);
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201,152,42,0.5);
+}
+
+.btn-start:active { transform: translateY(0); }
+
+/* ── Rules Card ── */
+.rules-card {
+  padding: 28px 40px;
+}
+
+.rules-card h3 {
+  font-family: 'Pirata One', cursive;
+  font-size: 1.3rem;
+  color: var(--foam);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.rules-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rules-card ul li {
+  padding-left: 20px;
+  position: relative;
+  color: rgba(240,232,216,0.8);
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+
+.rules-card ul li::before {
+  content: '⚓';
+  position: absolute;
+  left: 0;
+  font-size: 0.75rem;
+  top: 3px;
+}
+
+/* ── Animations ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 560px) {
+  .players-row { flex-direction: column; align-items: stretch; }
+  .vs-badge { text-align: center; padding-bottom: 0; }
+  .setup-card, .rules-card { padding: 24px 20px; }
+}

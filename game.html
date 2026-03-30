@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batalha Naval – Jogo</title>
+  <link rel="stylesheet" href="style-game.css" />
+</head>
+<body>
+
+  <div class="ocean-bg">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+  </div>
+
+  <!-- ══ OVERLAY DE POSICIONAMENTO ══ -->
+  <div id="placement-overlay" class="overlay active">
+    <div class="overlay-card">
+      <h2 id="placement-title">🚢 Posicione seus Navios</h2>
+      <p id="placement-subtitle">Clique em uma célula para posicionar. Pressione <kbd>R</kbd> para girar.</p>
+
+      <div class="placement-area">
+        <!-- Lista de navios a posicionar -->
+        <div class="ship-list-section">
+          <h3>Navios para posicionar:</h3>
+          <ul id="ship-queue" class="ship-queue"></ul>
+        </div>
+
+        <!-- Tabuleiro de posicionamento -->
+        <div class="placement-board-wrap">
+          <div id="placement-grid" class="grid-board placement-grid"></div>
+        </div>
+      </div>
+
+      <div class="placement-actions">
+        <button id="btn-rotate" class="btn-secondary">🔄 Girar (R)</button>
+        <button id="btn-random-place" class="btn-secondary">🎲 Aleatório</button>
+        <button id="btn-confirm-place" class="btn-primary" disabled>✅ Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OVERLAY DE PASSAGEM DE VEZ ══ -->
+  <div id="handover-overlay" class="overlay">
+    <div class="overlay-card handover-card">
+      <div class="handover-icon">🙈</div>
+      <h2 id="handover-title">Vez de ...</h2>
+      <p id="handover-msg">Passe o dispositivo para o próximo jogador</p>
+      <button id="btn-handover" class="btn-primary">Estou Pronto! ⚓</button>
+    </div>
+  </div>
+
+  <!-- ══ OVERLAY DE FIM DE JOGO ══ -->
+  <div id="gameover-overlay" class="overlay">
+    <div class="overlay-card gameover-card">
+      <div class="gameover-trophy">🏆</div>
+      <h2 id="gameover-title">Vitória!</h2>
+      <p id="gameover-msg"></p>
+      <button id="btn-restart" class="btn-primary">🔄 Jogar Novamente</button>
+    </div>
+  </div>
+
+  <!-- ══ JOGO ══ -->
+  <div id="game-wrapper" class="game-wrapper hidden">
+
+    <!-- PLACAR -->
+    <header class="scoreboard">
+      <div class="score-card" id="score-p1">
+        <span class="score-icon">🚢</span>
+        <div class="score-info">
+          <span class="score-name" id="name-p1">—</span>
+          <span class="score-label">Navios restantes</span>
+          <span class="score-value" id="ships-p1">5</span>
+        </div>
+        <div class="turn-indicator" id="turn-p1">SUA VEZ</div>
+      </div>
+
+      <div class="score-center">
+        <div class="game-title-small">⚓ BATALHA NAVAL</div>
+        <div class="turn-text" id="turn-text">Iniciando...</div>
+      </div>
+
+      <div class="score-card score-card-right" id="score-p2">
+        <div class="turn-indicator" id="turn-p2">SUA VEZ</div>
+        <div class="score-info score-info-right">
+          <span class="score-name" id="name-p2">—</span>
+          <span class="score-label">Navios restantes</span>
+          <span class="score-value" id="ships-p2">5</span>
+        </div>
+        <span class="score-icon">⚓</span>
+      </div>
+    </header>
+
+    <!-- ÁREA DE JOGO -->
+    <main class="game-area">
+
+      <!-- Tabuleiro do OPONENTE (onde atacar) -->
+      <section class="board-section" id="attack-section">
+        <h3 class="board-label" id="attack-label">Atacar Adversário</h3>
+        <div id="attack-grid" class="grid-board attack-grid"></div>
+      </section>
+
+      <!-- Painel lateral -->
+      <aside class="side-panel">
+
+        <!-- Histório de ações (lista dinâmica) -->
+        <div class="panel-block">
+          <h4>📋 Últimas Jogadas</h4>
+          <ol id="action-log" class="action-log"></ol>
+        </div>
+
+        <!-- Tabela de afundados (tabela dinâmica) -->
+        <div class="panel-block">
+          <h4>💀 Navios Afundados</h4>
+          <table class="sunk-table">
+            <thead>
+              <tr>
+                <th>Capitão</th>
+                <th>Navio</th>
+                <th>Tamanho</th>
+              </tr>
+            </thead>
+            <tbody id="sunk-table-body"></tbody>
+          </table>
+        </div>
+      </aside>
+
+      <!-- Meu tabuleiro (defesa) -->
+      <section class="board-section" id="defense-section">
+        <h3 class="board-label">Meu Oceano</h3>
+        <div id="defense-grid" class="grid-board defense-grid"></div>
+      </section>
+
+    </main>
+
+    <footer class="game-footer">
+      <button id="btn-end-turn" class="btn-end-turn" disabled>Fim de Turno →</button>
+    </footer>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
