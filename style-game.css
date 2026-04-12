@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Crimson+Pro:wght@400;600;700&display=swap');
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -22,13 +20,13 @@
 
 html, body {
   min-height: 100vh;
-  font-family: 'Crimson Pro', Georgia, serif;
+  font-family: Georgia, serif;
   background: var(--deep);
   color: var(--white);
   overflow-x: hidden;
 }
 
-/* ── Ocean BG ── */
+
 .ocean-bg {
   position: fixed;
   inset: 0;
@@ -61,10 +59,10 @@ html, body {
   50%       { transform: translateX(0%); }
 }
 
-/* ── Utilities ── */
+
 .hidden { display: none !important; }
 
-/* ── Overlays ── */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -101,7 +99,7 @@ html, body {
 }
 
 .overlay-card h2 {
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1.8rem;
   color: var(--gold);
   margin-bottom: 6px;
@@ -123,7 +121,7 @@ html, body {
   color: var(--white);
 }
 
-/* ── Placement area ── */
+
 .placement-area {
   display: flex;
   gap: 28px;
@@ -194,7 +192,7 @@ html, body {
   background: var(--muted);
 }
 
-/* ── Placement actions ── */
+
 .placement-actions {
   display: flex;
   gap: 12px;
@@ -202,7 +200,7 @@ html, body {
   flex-wrap: wrap;
 }
 
-/* ── Handover overlay ── */
+
 .handover-card {
   text-align: center;
   max-width: 480px;
@@ -223,7 +221,7 @@ html, body {
 .handover-card h2 { text-align: center; }
 .handover-card p  { text-align: center; }
 
-/* ── Gameover overlay ── */
+
 .gameover-card {
   text-align: center;
   max-width: 480px;
@@ -252,7 +250,7 @@ html, body {
   text-align: center;
 }
 
-/* ── Game wrapper ── */
+
 .game-wrapper {
   position: relative;
   z-index: 1;
@@ -261,7 +259,7 @@ html, body {
   flex-direction: column;
 }
 
-/* ── Scoreboard ── */
+
 .scoreboard {
   display: flex;
   align-items: center;
@@ -305,7 +303,7 @@ html, body {
 .score-info-right { align-items: flex-end; }
 
 .score-name {
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1.1rem;
   color: var(--gold-light);
   letter-spacing: 1px;
@@ -349,7 +347,7 @@ html, body {
 }
 
 .game-title-small {
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1rem;
   color: var(--foam);
   letter-spacing: 2px;
@@ -361,7 +359,7 @@ html, body {
   margin-top: 4px;
 }
 
-/* ── Game Area ── */
+
 .game-area {
   display: flex;
   gap: 20px;
@@ -372,7 +370,7 @@ html, body {
   flex-wrap: wrap;
 }
 
-/* ── Board sections ── */
+
 .board-section {
   display: flex;
   flex-direction: column;
@@ -381,7 +379,7 @@ html, body {
 }
 
 .board-label {
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1.1rem;
   letter-spacing: 1px;
   color: var(--muted);
@@ -390,7 +388,7 @@ html, body {
 #attack-section .board-label { color: var(--red-light); }
 #defense-section .board-label { color: var(--foam); }
 
-/* ── Grid Board ── */
+
 .grid-board {
   display: grid;
   grid-template-columns: 24px repeat(10, var(--cell-size));
@@ -422,7 +420,7 @@ html, body {
   transition: background 0.15s, transform 0.1s;
 }
 
-/* Attack grid cells are clickable */
+
 .attack-grid .cell:not(.hit):not(.miss) {
   cursor: crosshair;
 }
@@ -433,7 +431,7 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Defense grid: show ships */
+
 .cell.ship-cell {
   background: rgba(74, 158, 202, 0.25);
   border-color: rgba(74, 158, 202, 0.5);
@@ -444,7 +442,7 @@ html, body {
   border-color: var(--red-light);
 }
 
-/* Hit */
+
 .cell.hit {
   background: radial-gradient(circle, #e74c3c 0%, #8e1c11 100%);
   border-color: var(--red-light);
@@ -466,7 +464,7 @@ html, body {
   100% { transform: scale(1); }
 }
 
-/* Miss */
+
 .cell.miss {
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.15);
@@ -483,7 +481,7 @@ html, body {
   color: rgba(255,255,255,0.3);
 }
 
-/* Placement hover preview */
+
 .cell.preview-valid {
   background: rgba(39,174,96,0.35);
   border-color: var(--green-light);
@@ -494,13 +492,13 @@ html, body {
   border-color: var(--red-light);
 }
 
-/* Placement: placed ship */
+
 .placement-grid .cell.ship-cell {
   background: rgba(74,158,202,0.4);
   border-color: var(--foam);
 }
 
-/* ── Side Panel ── */
+
 .side-panel {
   display: flex;
   flex-direction: column;
@@ -518,14 +516,14 @@ html, body {
 }
 
 .panel-block h4 {
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1rem;
   color: var(--foam);
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
 
-/* Action log (OL) */
+
 .action-log {
   max-height: 180px;
   overflow-y: auto;
@@ -571,7 +569,7 @@ html, body {
   to   { transform: translateX(0);     opacity: 1; }
 }
 
-/* Sunk Table */
+
 .sunk-table {
   width: 100%;
   border-collapse: collapse;
@@ -603,7 +601,7 @@ html, body {
   to   { background: transparent; }
 }
 
-/* ── Footer ── */
+
 .game-footer {
   padding: 12px 24px;
   background: rgba(10,22,40,0.95);
@@ -618,7 +616,7 @@ html, body {
   border: none;
   border-radius: 8px;
   color: var(--deep);
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1.2rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -637,14 +635,14 @@ html, body {
   box-shadow: 0 6px 24px rgba(201,152,42,0.5);
 }
 
-/* ── Buttons general ── */
+
 .btn-primary {
   padding: 12px 28px;
   background: linear-gradient(135deg, var(--gold) 0%, #8a6010 100%);
   border: none;
   border-radius: 8px;
   color: var(--deep);
-  font-family: 'Pirata One', cursive;
+  font-family: fantasy, cursive;
   font-size: 1.1rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -668,7 +666,7 @@ html, body {
   border: 1px solid rgba(74,158,202,0.3);
   border-radius: 8px;
   color: var(--white);
-  font-family: 'Crimson Pro', serif;
+  font-family: Georgia, serif;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;

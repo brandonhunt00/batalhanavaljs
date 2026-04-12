@@ -1,10 +1,10 @@
-# ⚓ Batalha Naval JS
+# Batalha Naval
 
 Jogo de **Batalha Naval** para dois jogadores em uma única tela, desenvolvido com HTML, CSS e JavaScript puros — sem bibliotecas externas.
 
 Projeto desenvolvido como trabalho acadêmico da Unidade 01.
 
-## 🎮 Como Jogar
+## Como Jogar
 
 1. Abra o `index.html` no navegador
 2. Digite os nomes dos dois jogadores e clique em **Zarpar para a Batalha**
@@ -12,7 +12,7 @@ Projeto desenvolvido como trabalho acadêmico da Unidade 01.
 4. Os jogadores se alternam atacando as coordenadas do adversário
 5. Quem afundar toda a frota inimiga primeiro **vence!**
 
-## 🚢 Frota
+## Frota
 
 | Navio        | Tamanho |
 |--------------|---------|
@@ -22,7 +22,7 @@ Projeto desenvolvido como trabalho acadêmico da Unidade 01.
 | Submarino    | 2       |
 | Destruidor   | 2       |
 
-## 🗂️ Estrutura
+## Estrutura
 ```
 batalha-naval-js/
 ├── index.html        # Página inicial (configuração de nomes)
@@ -33,7 +33,7 @@ batalha-naval-js/
 └── game.js           # Lógica completa do jogo
 ```
 
-## ✅ Requisitos Técnicos Implementados
+## Requisitos Técnicos Implementados
 
 - Animações CSS (navios, ondas, explosões)
 - Dois jogadores humanos com passagem de tela
@@ -47,7 +47,7 @@ batalha-naval-js/
 - Separação completa de HTML, CSS e JS
 - Sem bibliotecas de terceiros
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - HTML5
 - CSS3 (animações, variáveis, grid)

@@ -1,15 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   BATALHA NAVAL – game.js
-   Separação completa HTML / CSS / JS
-   Classes: Ship, Board, Player, BattleshipGame
-═══════════════════════════════════════════════════════════════ */
-
 'use strict';
 
-/* ──────────────────────────────────────────
-   CLASSE: Ship
-   Representa um navio individual
-────────────────────────────────────────── */
+
 class Ship {
   constructor(name, size, emoji) {
     this.name   = name;
@@ -17,7 +8,7 @@ class Ship {
     this.emoji  = emoji;
     this.hits   = 0;
     this.sunk   = false;
-    this.cells  = []; // [{row, col}] preenchido ao posicionar
+    this.cells  = []; 
   }
 
   hit() {
@@ -28,10 +19,7 @@ class Ship {
   isSunk() { return this.sunk; }
 }
 
-/* ──────────────────────────────────────────
-   CLASSE: Board
-   Representa o tabuleiro 10×10 de um jogador
-────────────────────────────────────────── */
+
 class Board {
   static SIZE = 10;
 
@@ -41,14 +29,14 @@ class Board {
     this.ships = [];
   }
 
-  // Verifica se posição é válida para posicionar navio
+  
   canPlace(row, col, size, horizontal) {
     for (let i = 0; i < size; i++) {
       const r = horizontal ? row       : row + i;
       const c = horizontal ? col + i   : col;
       if (r < 0 || r >= Board.SIZE || c < 0 || c >= Board.SIZE) return false;
       if (this.grid[r][c] !== null) return false;
-      // Verifica vizinhos (1 célula de folga)
+      
       for (let dr = -1; dr <= 1; dr++) {
         for (let dc = -1; dc <= 1; dc++) {
           const nr = r + dr, nc = c + dc;
@@ -84,9 +72,9 @@ class Board {
     return this.ships.every(s => s.isSunk());
   }
 
-  // Posicionamento aleatório
+  
   placeRandom(ships) {
-    // Reset
+    
     this.grid  = Array.from({ length: Board.SIZE }, () => Array(Board.SIZE).fill(null));
     this.ships = [];
     ships.forEach(ship => {
@@ -112,10 +100,7 @@ class Board {
   }
 }
 
-/* ──────────────────────────────────────────
-   CLASSE: Player
-   Representa um jogador
-────────────────────────────────────────── */
+
 class Player {
   constructor(name) {
     this.name  = name;
@@ -138,18 +123,15 @@ class Player {
   }
 }
 
-/* ──────────────────────────────────────────
-   CLASSE: BattleshipGame
-   Orquestra a partida inteira
-────────────────────────────────────────── */
+
 class BattleshipGame {
   constructor(name1, name2) {
     this.players      = [new Player(name1), new Player(name2)];
-    this.currentIndex = 0;  // índice do jogador ativo
-    this.phase        = 'placement'; // placement | handover | battle | gameover
+    this.currentIndex = 0;  
+    this.phase        = 'placement'; 
     this.placingPlayerIndex = 0;
     this.horizontal   = true;
-    this.shipQueueIdx = 0;  // qual navio está sendo posicionado
+    this.shipQueueIdx = 0;  
     this.shotMadeThisTurn = false;
     this.actionLog    = [];
   }
@@ -159,21 +141,19 @@ class BattleshipGame {
   get placing()  { return this.players[this.placingPlayerIndex]; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CONTROLADOR DA UI
-═══════════════════════════════════════════════════════════════ */
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── Ler parâmetros da URL ─── */
+  
   const params = new URLSearchParams(window.location.search);
   const name1  = params.get('p1') || 'Jogador 1';
   const name2  = params.get('p2') || 'Jogador 2';
 
-  /* ─── Criar jogo ─── */
+  
   const game = new BattleshipGame(name1, name2);
 
-  /* ─── Referências DOM ─── */
+  
   const placementOverlay = document.getElementById('placement-overlay');
   const handoverOverlay  = document.getElementById('handover-overlay');
   const gameoverOverlay  = document.getElementById('gameover-overlay');
@@ -212,13 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btnEndTurn       = document.getElementById('btn-end-turn');
 
-  /* ─── Nomes no placar ─── */
+  
   nameP1El.textContent = name1;
   nameP2El.textContent = name2;
 
-  /* ════════════════════════════════════════
-     FASE DE POSICIONAMENTO
-  ════════════════════════════════════════ */
+  
 
   function startPlacementPhase() {
     game.phase           = 'placement';
@@ -275,17 +253,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Construir grade 10×10 ── */
+  
   function buildGrid(gridEl, boardData, isPlacement) {
     gridEl.innerHTML = '';
     const COLS = ['A','B','C','D','E','F','G','H','I','J'];
 
-    // Célula vazia canto superior-esquerdo
+    
     const corner = document.createElement('div');
     corner.className = 'cell-header';
     gridEl.appendChild(corner);
 
-    // Cabeçalhos de coluna (letras)
+    
     COLS.forEach(c => {
       const h = document.createElement('div');
       h.className = 'cell-header';
@@ -294,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     for (let row = 0; row < Board.SIZE; row++) {
-      // Cabeçalho de linha (número)
+      
       const rh = document.createElement('div');
       rh.className = 'cell-header';
       rh.textContent = row + 1;
@@ -307,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cell.dataset.col = col;
 
         if (isPlacement) {
-          // Mostrar navios já posicionados
+          
           if (game.placing.board.grid[row][col]) cell.classList.add('ship-cell');
           cell.addEventListener('mouseover', onPlacementHover);
           cell.addEventListener('mouseout',  onPlacementOut);
@@ -341,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ── Hover preview de posicionamento ── */
+  
   function getCellsForPreview(row, col) {
     const p    = game.placing;
     const ship = p.ships[game.shipQueueIdx];
@@ -395,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ── Botão girar ── */
+  
   btnRotate.addEventListener('click', () => {
     game.horizontal = !game.horizontal;
     btnRotate.textContent = game.horizontal ? '🔄 Girar (R) – Horizontal' : '🔄 Girar (R) – Vertical';
@@ -407,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ── Botão aleatório ── */
+  
   btnRandom.addEventListener('click', () => {
     const p = game.placing;
     p.board.placeRandom(p.ships);
@@ -418,15 +396,15 @@ document.addEventListener('DOMContentLoaded', () => {
     placementSubtitle.textContent = 'Navios posicionados aleatoriamente! Confirme para continuar.';
   });
 
-  /* ── Confirmar posicionamento ── */
+  
   btnConfirm.addEventListener('click', () => {
     if (game.placingPlayerIndex === 0) {
-      // Passou para o segundo jogador posicionar
+      
       game.placingPlayerIndex = 1;
       game.shipQueueIdx = 0;
       btnConfirm.disabled = true;
 
-      // Mostra handover antes do P2 posicionar
+      
       hideAllOverlays();
       handoverTitle.textContent = `Vez de ${game.players[1].name} posicionar`;
       handoverMsg.textContent   = 'Passe o dispositivo. Não deixe o adversário ver!';
@@ -434,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnHandover.dataset.context = 'placement';
 
     } else {
-      // Ambos posicionaram – iniciar batalha
+      
       game.phase        = 'battle';
       game.currentIndex = 0;
       game.shotMadeThisTurn = false;
@@ -447,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ── Handover ── */
+  
   btnHandover.addEventListener('click', () => {
     const ctx = btnHandover.dataset.context;
     hideAllOverlays();
@@ -456,15 +434,13 @@ document.addEventListener('DOMContentLoaded', () => {
       renderPlacementForCurrentPlayer();
       showOverlay(placementOverlay);
     } else {
-      // Batalha
+      
       showGameBoard();
       gameWrapper.classList.remove('hidden');
     }
   });
 
-  /* ════════════════════════════════════════
-     FASE DE BATALHA
-  ════════════════════════════════════════ */
+  
 
   function showGameBoard() {
     updateScoreboard();
@@ -480,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shipsP1El.textContent = p0.shipsRemaining();
     shipsP2El.textContent = p1.shipsRemaining();
 
-    // Destaque de quem está jogando
+    
     scoreP1El.classList.toggle('active-turn', game.currentIndex === 0);
     scoreP2El.classList.toggle('active-turn', game.currentIndex === 1);
 
@@ -490,9 +466,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderBattleGrids() {
-    // Tabuleiro de ataque = grade do oponente
+    
     buildGridBattle(attackGrid,  game.opponent.board, false);
-    // Tabuleiro de defesa = grade própria
+    
     buildGridBattle(defenseGrid, game.current.board,  true);
   }
 
@@ -535,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function onAttackClick(e) {
-    if (game.shotMadeThisTurn) return; // só 1 tiro por turno
+    if (game.shotMadeThisTurn) return; 
 
     const row = parseInt(e.currentTarget.dataset.row);
     const col = parseInt(e.currentTarget.dataset.col);
@@ -545,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     game.shotMadeThisTurn = true;
 
-    // Atualizar célula visualmente
+    
     const cell = e.currentTarget;
     if (result.result === 'hit' || result.result === 'sunk') {
       cell.classList.add('hit');
@@ -554,18 +530,18 @@ document.addEventListener('DOMContentLoaded', () => {
       cell.classList.add('miss');
     }
 
-    // Registrar no log
+    
     const COLS = ['A','B','C','D','E','F','G','H','I','J'];
     const coord = `${COLS[col]}${row + 1}`;
     addToLog(result, coord, game.current.name, result.ship);
 
-    // Tabela de afundados
+    
     if (result.result === 'sunk') {
       addSunkRow(game.current.name, result.ship);
-      updateDefenseGrid(); // atualizar grade de defesa do oponente ao virar
+      updateDefenseGrid(); 
     }
 
-    // Verificar vitória
+    
     if (game.opponent.board.allSunk()) {
       showGameOver(game.current.name);
       return;
@@ -576,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateDefenseGrid() {
-    // Atualiza células sunk na grade de defesa
+    
     const cells = defenseGrid.querySelectorAll('.cell');
     cells.forEach(cell => {
       const row  = parseInt(cell.dataset.row);
@@ -586,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Log de ações (OL dinâmica) ── */
+  
   function addToLog(result, coord, playerName, ship) {
     const li = document.createElement('li');
     let text;
@@ -602,10 +578,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     li.textContent = text;
 
-    // Inserir no topo
+    
     actionLogEl.insertBefore(li, actionLogEl.firstChild);
 
-    // Limitar a 20 entradas
+    
     while (actionLogEl.children.length > 20) {
       actionLogEl.removeChild(actionLogEl.lastChild);
     }
@@ -613,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
     game.actionLog.unshift({ text, type: li.className });
   }
 
-  /* ── Tabela de afundados (TABLE dinâmica) ── */
+  
   function addSunkRow(playerName, ship) {
     const tr = document.createElement('tr');
     tr.className = 'new-row';
@@ -633,21 +609,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sunkTableBody.appendChild(tr);
 
-    // Remover classe de animação após ela terminar
+    
+    while (sunkTableBody.rows.length > 8) {
+      sunkTableBody.removeChild(sunkTableBody.firstChild);
+    }
+
+    
     setTimeout(() => tr.classList.remove('new-row'), 500);
   }
 
-  /* ── Fim de turno ── */
+  
   btnEndTurn.addEventListener('click', () => {
     if (!game.shotMadeThisTurn) return;
 
     btnEndTurn.disabled = true;
     game.shotMadeThisTurn = false;
 
-    // Trocar jogador
+    
     game.currentIndex = 1 - game.currentIndex;
 
-    // Handover
+    
     hideAllOverlays();
     handoverTitle.textContent = `Vez de ${game.current.name} atacar`;
     handoverMsg.textContent   = 'Passe o dispositivo para o próximo jogador!';
@@ -655,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnHandover.dataset.context = 'battle';
   });
 
-  /* ── Game over ── */
+  
   function showGameOver(winnerName) {
     gameoverTitle.textContent = `🏆 ${winnerName} venceu!`;
     gameoverMsg.textContent   = `Parabéns, Capitão ${winnerName}! Você afundou toda a frota inimiga!`;
@@ -667,9 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'index.html';
   });
 
-  /* ════════════════════════════════════════
-     HELPERS
-  ════════════════════════════════════════ */
+  
 
   function showOverlay(overlay) {
     overlay.classList.add('active');
@@ -679,6 +658,6 @@ document.addEventListener('DOMContentLoaded', () => {
     [placementOverlay, handoverOverlay, gameoverOverlay].forEach(o => o.classList.remove('active'));
   }
 
-  /* ── Iniciar ── */
+  
   startPlacementPhase();
 });

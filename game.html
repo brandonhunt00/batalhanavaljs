@@ -13,20 +13,17 @@
     <div class="wave wave2"></div>
   </div>
 
-  <!-- ══ OVERLAY DE POSICIONAMENTO ══ -->
   <div id="placement-overlay" class="overlay active">
     <div class="overlay-card">
       <h2 id="placement-title">🚢 Posicione seus Navios</h2>
       <p id="placement-subtitle">Clique em uma célula para posicionar. Pressione <kbd>R</kbd> para girar.</p>
 
       <div class="placement-area">
-        <!-- Lista de navios a posicionar -->
         <div class="ship-list-section">
           <h3>Navios para posicionar:</h3>
           <ul id="ship-queue" class="ship-queue"></ul>
         </div>
 
-        <!-- Tabuleiro de posicionamento -->
         <div class="placement-board-wrap">
           <div id="placement-grid" class="grid-board placement-grid"></div>
         </div>
@@ -40,7 +37,6 @@
     </div>
   </div>
 
-  <!-- ══ OVERLAY DE PASSAGEM DE VEZ ══ -->
   <div id="handover-overlay" class="overlay">
     <div class="overlay-card handover-card">
       <div class="handover-icon">🙈</div>
@@ -50,7 +46,6 @@
     </div>
   </div>
 
-  <!-- ══ OVERLAY DE FIM DE JOGO ══ -->
   <div id="gameover-overlay" class="overlay">
     <div class="overlay-card gameover-card">
       <div class="gameover-trophy">🏆</div>
@@ -60,10 +55,8 @@
     </div>
   </div>
 
-  <!-- ══ JOGO ══ -->
   <div id="game-wrapper" class="game-wrapper hidden">
 
-    <!-- PLACAR -->
     <header class="scoreboard">
       <div class="score-card" id="score-p1">
         <span class="score-icon">🚢</span>
@@ -91,25 +84,20 @@
       </div>
     </header>
 
-    <!-- ÁREA DE JOGO -->
     <main class="game-area">
 
-      <!-- Tabuleiro do OPONENTE (onde atacar) -->
       <section class="board-section" id="attack-section">
         <h3 class="board-label" id="attack-label">Atacar Adversário</h3>
         <div id="attack-grid" class="grid-board attack-grid"></div>
       </section>
 
-      <!-- Painel lateral -->
       <aside class="side-panel">
 
-        <!-- Histório de ações (lista dinâmica) -->
         <div class="panel-block">
           <h4>📋 Últimas Jogadas</h4>
           <ol id="action-log" class="action-log"></ol>
         </div>
 
-        <!-- Tabela de afundados (tabela dinâmica) -->
         <div class="panel-block">
           <h4>💀 Navios Afundados</h4>
           <table class="sunk-table">
@@ -125,7 +113,6 @@
         </div>
       </aside>
 
-      <!-- Meu tabuleiro (defesa) -->
       <section class="board-section" id="defense-section">
         <h3 class="board-label">Meu Oceano</h3>
         <div id="defense-grid" class="grid-board defense-grid"></div>
